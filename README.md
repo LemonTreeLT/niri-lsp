@@ -3,6 +3,8 @@
 > 当你打算为这个项目付出精力的时候请三思，因为这个项目完全是由 codex 写的
 # niri-lsp
 
+[![CI](https://github.com/LemonTreeLT/niri-lsp/actions/workflows/ci.yml/badge.svg)](https://github.com/LemonTreeLT/niri-lsp/actions/workflows/ci.yml)
+
 `niri-lsp` is a stdio language server for [niri](https://github.com/YaLTeR/niri) KDL configuration files. This first release supports the audited schema snapshot for **niri 26.4.0**.
 
 It needs no locally installed niri. Only a root `config.kdl` and files it recursively includes receive niri diagnostics and language features. A differently named root can opt in by making its first non-empty line `// niri-lsp: root`.
@@ -24,6 +26,16 @@ Install the default package into your user profile:
 ```sh
 nix profile install github:LemonTreeLT/niri-lsp#default
 ```
+
+### Cachix binary cache
+
+This project publishes Linux build outputs to the public [`niri-lsp` Cachix cache](https://app.cachix.org/cache/niri-lsp#pull). To use it locally, install the Cachix client and configure the cache once:
+
+```sh
+nix run github:cachix/cachix -- use niri-lsp
+```
+
+This is optional: Nix will build the package from source when the cache is not configured or does not contain an output for your platform.
 
 For NixOS or Home Manager, add the project to your flake inputs:
 

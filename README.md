@@ -1,5 +1,5 @@
 > [!WARNING]
-> Think twice before you want to contribute to this project, because it was totally written by codex
+> Think twice before you want to contribute to this project, because it was totally written by codex  
 > 当你打算为这个项目付出精力的时候请三思，因为这个项目完全是由 codex 写的
 # niri-lsp
 
@@ -8,9 +8,46 @@
 It needs no locally installed niri. Only a root `config.kdl` and files it recursively includes receive niri diagnostics and language features. A differently named root can opt in by making its first non-empty line `// niri-lsp: root`.
 
 ```sh
-nix develop       # Rust development shell
-nix build         # build the package
-nix run .# -- --version
+nix run github:LemonTreeLT/niri-lsp# -- --version
+```
+
+## Installation with Nix
+
+Run the language server without installing it:
+
+```sh
+nix run github:LemonTreeLT/niri-lsp#
+```
+
+Install the default package into your user profile:
+
+```sh
+nix profile install github:LemonTreeLT/niri-lsp#default
+```
+
+For NixOS or Home Manager, add the project to your flake inputs:
+
+```nix
+inputs.niri-lsp = {
+  url = "github:LemonTreeLT/niri-lsp";
+  inputs.nixpkgs.follows = "nixpkgs";
+};
+```
+
+Then install the package declaratively in NixOS:
+
+```nix
+environment.systemPackages = [
+  inputs.niri-lsp.packages.${pkgs.stdenv.hostPlatform.system}.default
+];
+```
+
+Or use the same package in Home Manager:
+
+```nix
+home.packages = [
+  inputs.niri-lsp.packages.${pkgs.stdenv.hostPlatform.system}.default
+];
 ```
 
 ## Neovim

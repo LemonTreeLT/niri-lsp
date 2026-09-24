@@ -37,6 +37,8 @@ nix run github:cachix/cachix -- use niri-lsp
 
 This is optional: Nix will build the package from source when the cache is not configured or does not contain an output for your platform.
 
+For systems without Nix, download the prebuilt x86_64 Linux archive from the [latest GitHub release](https://github.com/LemonTreeLT/niri-lsp/releases/latest). Verify its accompanying `.sha256` file before placing `niri-lsp` on your `PATH`.
+
 For NixOS or Home Manager, add the project to your flake inputs:
 
 ```nix

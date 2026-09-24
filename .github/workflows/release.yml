@@ -1,0 +1,41 @@
+name: Release
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build Linux binary
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out release tag
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.release.tag_name }}
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+
+      - name: Configure Cachix
+        uses: cachix/cachix-action@v17
+        with:
+          name: niri-lsp
+
+      - name: Build release archive
+        env:
+          ASSET_PREFIX: niri-lsp-x86_64-unknown-linux-gnu
+        run: |
+          nix build .#default --out-link result
+          mkdir dist
+          tar -C result/bin -czf "dist/${ASSET_PREFIX}.tar.gz" niri-lsp
+          sha256sum "dist/${ASSET_PREFIX}.tar.gz" > "dist/${ASSET_PREFIX}.tar.gz.sha256"
+
+      - name: Upload release assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "${{ github.event.release.tag_name }}" dist/* --clobber

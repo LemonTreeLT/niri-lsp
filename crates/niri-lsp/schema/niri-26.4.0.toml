@@ -1,0 +1,23 @@
+# niri-lsp schema artifact
+# Source: niri v26.4.0
+# This compact declarative inventory is reviewed before release.
+version = 1
+niri_ref = "v26.4.0"
+
+[nodes]
+include = { args = ["path"], properties = ["optional:bool"], placement = "root" }
+input = { block = true, singleton = true }
+output = { block = true }
+layout = { block = true, singleton = true }
+binds = { block = true, singleton = true }
+environment = { block = true, singleton = true }
+spawn-at-startup = { args = ["command"] }
+window-rule = { block = true }
+layer-rule = { block = true }
+hotkey-overlay = { }
+cursor = { }
+screenshot-path = { args = ["path"] }
+overview = { block = true }
+animations = { block = true }
+debug = { block = true }
+prefer-no-csd = { }

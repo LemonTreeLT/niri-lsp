@@ -1,3 +1,6 @@
+> [!WARNING]
+> Think twice before you want to contribute to this project, because it was totally written by codex
+> 当你打算为这个项目付出精力的时候请三思，因为这个项目完全是由 codex 写的
 # niri-lsp
 
 `niri-lsp` is a stdio language server for [niri](https://github.com/YaLTeR/niri) KDL configuration files. This first release supports the audited schema snapshot for **niri 26.4.0**.
